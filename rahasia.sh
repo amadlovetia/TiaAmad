@@ -86,7 +86,7 @@ do
             break
             ;;		
         "Mematikan Akun SSH Yang Max Login Lebih Dari 2"
-        userlimit 2
+        bash userlimit 2
         break
         ;;
 		"Cek Akun Dan Masa Aktif SSH/VPN")
