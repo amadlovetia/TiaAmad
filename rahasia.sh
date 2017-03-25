@@ -65,7 +65,7 @@ SMS/Telegram/Whatsapp: 081268428112
 
 ";
 PS3='Please enter your choice: '
-options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH Yang Max Login Dari 2" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Restart Server" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Menambahkan Port Squid" "Melihat Detail Lengkap VPS") "Quit")
+options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Restart Server" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Menambahkan Port Squid" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -85,14 +85,14 @@ do
             delete_user
             break
             ;;		
-        "Mematikan Akun SSH Yang Max Login Lebih Dari 2"
-        bash userlimit 2
-        break
-        ;;
-		"Cek Akun Dan Masa Aktif SSH/VPN")
-            cekuser
-            break
-            ;;
+		"Mematikan Akun SSH/VPN Login Max 2 Device")
+			bash userlimit 2
+			break
+			;;
+		"Cek Akun SSH/VPN Dan Masa Aktif")
+			cekuser
+			break
+			;;
 		"Akun SSH/VPN Aktif")
 			not_expired_users
 			break
@@ -146,11 +146,6 @@ do
             bash squid.sh
 			break
 			;;			
-     "Melihat Detail Lengkap VPS")
-     benchnetwork
-     break
-     ;;
-echo ""        
         "Quit")
             break
             ;;
