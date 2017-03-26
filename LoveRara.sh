@@ -173,9 +173,6 @@ rm /root/webmin_1.670_all.deb
 service webmin restart
 service vnstat restart
 
-# OCS
-wget https://raw.githubusercontent.com/rizal180499/Auto-Installer-VPS/master/ocs_panel/ocs-deb7-32.sh && chmod +x ocs-deb7-32.sh && ./ocs-deb7-32.sh
-
 # usernew
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/usernew.sh
 cp /root/usernew.sh /usr/bin/usernew
