@@ -2,8 +2,7 @@
 
 wget -q -O IP host/data/IP.txt
 if ! grep -w -q $MYIP IP; then
-Hanya IP Terdaftar Yang Bisa Menggunakan Script Ini, Silahkan Hubungi :
-Sebastian Rahmad or 081268428112
+Hanya IP Terdaftar Yang Bisa Menggunakan Script Ini, Silahkan Hubungi : Sebastian Rahmad or 081268428112
 fi
 
 # go to root
