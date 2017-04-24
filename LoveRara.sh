@@ -1,8 +1,3 @@
-wget -q -O IP host/data/IP.txt
-if ! grep -w -q $MYIP IP; then
-echo "Hanya IP Terdaftar Yang Bisa Menggunakan Script Ini, Hubungi Kontak Ini : Sebastian Rahmad"
-fi
-
 #!/bin/bash
 
 # go to root
