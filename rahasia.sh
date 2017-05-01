@@ -89,7 +89,7 @@ do
 			bash userlimit 2
 			break
 			;;
-		"Cek Akun SSH/VPN Dan Masa Aktif")
+		"Cek Akun Dan Masa Aktif SSH/VPN")
 			cekuser
 			break
 			;;
