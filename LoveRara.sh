@@ -161,6 +161,11 @@ wget https://raw.githubusercontent.com/sean54321/AmadRara/master/cekuser.sh
 cp /root/cekuser.sh /usr/bin/cekuser
 chmod +x /usr/bin/cekuser
 
+# ubahpass
+wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/ubahpass.sh
+cp /root/ubahpass.sh /usr/bin/ubahpass
+chmod +x /usr/bin/ubahpass
+
 # userlogin
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/userlogin.sh
 cp /root/userlogin.sh /usr/bin/userlogin
