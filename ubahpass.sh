@@ -1,9 +1,8 @@
 #!/bin/bash
 
-read -p " Isikan Username : " Login
+read -p "Isikan Username : " Login
 read -p "Password Baru : " Pass
-useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
-exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
+		passwd $Login
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 echo -e "--------------------------------"
 echo -e "Password telah diganti dengan $Pass"
