@@ -140,7 +140,7 @@ do
 			bannedexp
 			break
 			;;
-		"Membuat Banner SSH"
+		"Membuat Banner SSH")
 			nano /etc/bannerssh.net
 			service ssh restart &&  service dropbear restart
 			break
