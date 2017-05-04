@@ -166,6 +166,11 @@ wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/ubahpass.sh
 cp /root/ubahpass.sh /usr/bin/ubahpass
 chmod +x /usr/bin/ubahpass
 
+# bannedexp
+wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/bannedexp.sh
+cp /root/bannedexp.sh /usr/bin/bannedexp
+chmod +x /usr/bin/bannedexp
+
 # userlogin
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/userlogin.sh
 cp /root/userlogin.sh /usr/bin/userlogin
