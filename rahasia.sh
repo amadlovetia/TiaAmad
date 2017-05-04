@@ -56,16 +56,54 @@ function used_data(){
 }
 
 clear
-echo "System by Sebastian Rahmad (Copyright 2016, KeluargaSSH)
-
-For support: Keluarga SSH 
-Email: pramadan99@gmail.com
-My Facebook: https://www.facebook.com/sebastian.rahmad.26/
-SMS/Telegram/Whatsapp: 081268428112
+sysinfo () {
+	# Removing existing bench.log
+	rm -rf $HOME/bench.log
+	# Reading out system information...
+	# Reading CPU model
+	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+	# Reading amount of CPU cores
+	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+	# Reading CPU frequency in MHz
+	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+	# Reading total memory in MB
+	tram=$( free -m | awk 'NR==2 {print $2}' )
+	# Reading Swap in MB
+	vram=$( free -m | awk 'NR==4 {print $2}' )
+	# Reading system uptime
+	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' | sed 's/^[ \t]*//;s/[ \t]*$//' )
+	# Reading operating system and version (simple, didn't filter the strings at the end...)
+	opsy=$( cat /etc/issue.net | awk 'NR==1 {print}' ) # Operating System & Version
+	arch=$( uname -m ) # Architecture
+	lbit=$( getconf LONG_BIT ) # Architecture in Bit
+	hn=$( hostname ) # Hostname
+	kern=$( uname -r )
+	# Date of benchmark
+	bdates=$( date )
+	echo "Benchmark started on $bdates" | tee -a $HOME/bench.log
+	echo "Full benchmark log: $HOME/bench.log" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	# Output of results
+	echo "System Info" | tee -a $HOME/bench.log
+	echo "-----------" | tee -a $HOME/bench.log
+	echo "Processor	: $cname" | tee -a $HOME/bench.log
+	echo "CPU Cores	: $cores" | tee -a $HOME/bench.log
+	echo "Frequency	: $freq MHz" | tee -a $HOME/bench.log
+	echo "Memory		: $tram MB" | tee -a $HOME/bench.log
+	echo "Swap		: $vram MB" | tee -a $HOME/bench.log
+	echo "Uptime		: $up" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "OS		: $opsy" | tee -a $HOME/bench.log
+	echo "Arch		: $arch ($lbit Bit)" | tee -a $HOME/bench.log
+	echo "Kernel		: $kern" | tee -a $HOME/bench.log
+	echo "Hostname	: $hn" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+}
 
 ";
-PS3='Please enter your choice: '
-options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Restart Server" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Menambahkan Port Squid" "Quit")
+PS3='Masukkan Angka Pilihan Yang Diinginkan: '
+options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Mengubah Password Akun SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Mematikan Akun SSH/VPN Yang Sudah Expired" "Benchmark" "Restart Server" "Restart Webmin" "Restart Dropbear" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Menambahkan Port Squid" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -75,6 +113,10 @@ do
             ;;
 		"Buat Akun Trial SSH/VPN")
 			trial
+			break
+			;;
+		"Mengubah Password Akun SSH/VPN")
+			ubahpass
 			break
 			;;
         "Perpanjang Akun SSH/VPN")
@@ -100,11 +142,27 @@ do
 		"Akun SSH/VPN Expired")
 			expired_users
 			break
-			;;		
+			;;	
+		"Mematikan Akun SSH/VPN Yang Sudah Expired")
+			bannedexp
+			break
+			;;
+		"Benchmark")
+			benchnetwork
+			break
+			;;
 		"Restart Server")
 			reboot
 			break
-			;;	
+			;;
+		"Restart Webmin")
+			service webmin restart
+			break
+			;;
+		"Restart Dropbear")	
+			service dropbear restart
+			break
+			;;
 		"Ganti Password VPS")
 			passwd
 			break
