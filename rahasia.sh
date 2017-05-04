@@ -3,6 +3,8 @@ myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*
 
 flag=0
 
+IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+
 echo
 
 function create_user() {
@@ -56,55 +58,46 @@ function used_data(){
 }
 
 clear
-sysinfo () {
-	# Removing existing bench.log
-	rm -rf $HOME/bench.log
-	# Reading out system information...
-	# Reading CPU model
-	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
-	# Reading amount of CPU cores
-	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
-	# Reading CPU frequency in MHz
-	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
-	# Reading total memory in MB
-	tram=$( free -m | awk 'NR==2 {print $2}' )
-	# Reading Swap in MB
-	vram=$( free -m | awk 'NR==4 {print $2}' )
-	# Reading system uptime
-	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' | sed 's/^[ \t]*//;s/[ \t]*$//' )
-	# Reading operating system and version (simple, didn't filter the strings at the end...)
-	opsy=$( cat /etc/issue.net | awk 'NR==1 {print}' ) # Operating System & Version
-	arch=$( uname -m ) # Architecture
-	lbit=$( getconf LONG_BIT ) # Architecture in Bit
-	hn=$( hostname ) # Hostname
-	kern=$( uname -r )
-	# Date of benchmark
-	bdates=$( date )
-	echo "Benchmark started on $bdates" | tee -a $HOME/bench.log
-	echo "Full benchmark log: $HOME/bench.log" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	# Output of results
-	echo "System Info" | tee -a $HOME/bench.log
-	echo "-----------" | tee -a $HOME/bench.log
-	echo "Processor	: $cname" | tee -a $HOME/bench.log
-	echo "CPU Cores	: $cores" | tee -a $HOME/bench.log
-	echo "Frequency	: $freq MHz" | tee -a $HOME/bench.log
-	echo "Memory		: $tram MB" | tee -a $HOME/bench.log
-	echo "Swap		: $vram MB" | tee -a $HOME/bench.log
-	echo "Uptime		: $up" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "OS		: $opsy" | tee -a $HOME/bench.log
-	echo "Arch		: $arch ($lbit Bit)" | tee -a $HOME/bench.log
-	echo "Kernel		: $kern" | tee -a $HOME/bench.log
-	echo "Hostname	: $hn" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-}
-
-";
+echo "--------------- Selamat Datang Di Server - Host: $IP ---------------"
+        # Reading out system information...
+        # Reading CPU model
+        cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+        # Reading amount of CPU cores
+        cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+        # Reading CPU frequency in MHz
+        freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+        # Reading total memory in MB
+        tram=$( free -m | awk 'NR==2 {print $2}' )
+        # Reading Swap in MB
+        vram=$( free -m | awk 'NR==4 {print $2}' )
+        # Reading system uptime
+        up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' | sed 's/^[ \t]*//;s/[ \t]*$//' )
+        # Reading operating system and version (simple, didn't filter the strings at the end...)
+        opsy=$( cat /etc/issue.net | awk 'NR==1 {print}' ) # Operating System & Version
+        arch=$( uname -m ) # Architecture
+        lbit=$( getconf LONG_BIT ) # Architecture in Bit
+        hn=$( hostname ) # Hostname
+        kern=$( uname -r )
+        # Date of benchmark
+        bdates=$( date )
+        # Output of results
+        echo "System Info"
+        echo "-----------"
+        echo "Processor : $cname"
+        echo "CPU Cores : $cores"
+        echo "Frequency : $freq MHz"
+        echo "Memory            : $tram MB"
+        echo "Swap              : $vram MB"
+        echo "Uptime            : $up"
+        echo "OS                : $opsy"
+        echo "Kernel            : $kern"
+        echo "Hostname  : $hn"
+echo "---------------------------------------------------------------------------"
+echo "Apa Yang Ingin Anda Lakukan?"
 PS3='Masukkan Angka Pilihan Yang Diinginkan: '
-options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Mengubah Password Akun SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Mematikan Akun SSH/VPN Yang Sudah Expired" "Benchmark" "Restart Server" "Restart Webmin" "Restart Dropbear" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Menambahkan Port Squid" "Quit")
+options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Mengubah Password Akun SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Mematikan Akun SSH/VPN Yang Sudah Expired" "Membuat Banner SSH" "Benchmark" "Restart Server" "Restart Webmin" "Restart Dropbear" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Mengubah Port Openssh" "Menambahkan Port Squid" "Quit")
 select opt in "${options[@]}"
+
 do
     case $opt in
         "Buat Akun SSH/VPN")
@@ -145,6 +138,11 @@ do
 			;;	
 		"Mematikan Akun SSH/VPN Yang Sudah Expired")
 			bannedexp
+			break
+			;;
+		"Membuat Banner SSH"
+			nano /etc/bannerssh.net
+			service ssh restart &&  service dropbear restart
 			break
 			;;
 		"Benchmark")
@@ -200,6 +198,17 @@ do
             echo "Dropbear Updated : Port $PORT"
 			break
 			;;
+		"Mengubah Port Openssh")	
+            echo "Silahkan ganti port Openssh anda lalu klik enter?"| lolcat
+            echo "Port default dan Port 2 tidak boleh sama !!!"| lolcat
+	    echo "Port default: 22"| lolcat
+	    read -p "Port 2: " -e -i 80 PORT
+	    sed -i "s/Port [0-9]*\nPort [0-9]*/Port 22\nPort $PORT/g" /etc/ssh/sshd_config
+           # sed -i "s/http_port [0-9]*\nhttp_port [0-9]*/http_port $PORT1\nhttp_port $PORT2/g" /etc/squid3/squid.conf
+            service ssh restart
+            echo "Openssh Updated Port: $PORT"| lolcat
+			break
+			;;	
         "Menambahkan Port Squid")	
             bash squid.sh
 			break
