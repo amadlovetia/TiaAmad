@@ -35,11 +35,11 @@ echo "0 20 * * * root service dropbear restart" > /etc/cron.d/dropbear5
 echo "0 20 * * * root service ssh restart" >> /etc/cron.d/dropbear5
 echo "0 23 * * * root service dropbear restart" > /etc/cron.d/dropbear6
 echo "0 23 * * * root service ssh restart" >> /etc/cron.d/dropbear6
-#echo "* * * * * root sleep 10; ./userlimit.sh 2" > /etc/cron.d/userlimit2
-#echo "* * * * * root sleep 20; ./userlimit.sh 2" > /etc/cron.d/userlimit4
-#echo "* * * * * root sleep 30; ./userlimit.sh 2" > /etc/cron.d/userlimit6
-#echo "* * * * * root sleep 40; ./userlimit.sh 2" > /etc/cron.d/userlimit8
-#echo "* * * * * root sleep 50; ./userlimit.sh 2" > /etc/cron.d/userlimit11
+echo "* * * * * root sleep 10; ./userlimit.sh 2" > /etc/cron.d/userlimit2
+echo "* * * * * root sleep 20; ./userlimit.sh 2" > /etc/cron.d/userlimit4
+echo "* * * * * root sleep 30; ./userlimit.sh 2" > /etc/cron.d/userlimit6
+echo "* * * * * root sleep 40; ./userlimit.sh 2" > /etc/cron.d/userlimit8
+echo "* * * * * root sleep 50; ./userlimit.sh 2" > /etc/cron.d/userlimit11
 echo "0 1 * * * root ./userexpired.sh" > /etc/cron.d/userexpired
 echo "0 * * * * root ./clearcache.sh" > /etc/cron.d/clearcache1
 echo "10 * * * * root ./clearcache.sh" > /etc/cron.d/clearcache2
@@ -161,9 +161,13 @@ service ssh restart
 
 # install dropbear
 apt-get -y install dropbear
-wget -O /etc/default/dropbear "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/dropbear"
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 80"/g' /etc/default/dropbear
+echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
+wget -O /etc/default/dropbear "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/dropbear"
 
 # install vnstat gui
 cd /home/vps/public_html/
@@ -199,34 +203,6 @@ service vnstat restart
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/usernew.sh
 cp /root/usernew.sh /usr/bin/usernew
 chmod +x /usr/bin/usernew
-
-# auto kill dropbear
-wget "https://raw.githubusercontent.com/yusuf-ardiansyah/tamvan/master/menu/userlimit.sh"
-mv ./userlimit /usr/bin/userlimit.sh
-chmod +x /usr/bin/userlimit.sh
-echo " /etc/security/limits.conf" > /etc/security/limits.conf
-
-# auto kill openssh
-wget "https://raw.githubusercontent.com/yusuf-ardiansyah/tamvan/master/menu/userlimitssh.sh"
-mv ./userlimitssh.sh /usr/bin/userlimitssh.sh
-chmod +x /usr/bin/userlimitssh.sh
-
-# tambahan
-wget -O autokill.sh "https://raw.githubusercontent.com/yusuf-ardiansyah/tamvan/master/menu/autokill.sh"
-wget -O userlimitssh.sh "https://raw.githubusercontent.com/yusuf-ardiansyah/tamvan/master/menu/userlimitssh.sh"
-echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
-echo "@reboot root /root/userlimitssh.sh" > /etc/cron.d/userlimitssh
-echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
-sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
-chmod 755 userlimit.sh
-chmod +x autokill.sh
-chmod +x userlimitssh.sh
-
-# userlimit
-cd
-wget "https://raw.githubusercontent.com/yusuf-ardiansyah/tamvan/master/conf/limits.conf"
-mv limits.conf /etc/security/limits.conf
-chmod 644 /etc/security/limits.conf
 
 # userlimit
 wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/userlimit.sh
