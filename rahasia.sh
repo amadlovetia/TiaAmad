@@ -83,55 +83,77 @@ echo "--------------- Selamat Datang Di Server - Host: $IP ---------------"
         # Output of results
         echo "System Info"
         echo "-----------"
-        echo "Processor : $cname"
-        echo "CPU Cores : $cores"
-        echo "Frequency : $freq MHz"
-        echo "Memory    : $tram MB"
-        echo "Swap      : $vram MB"
-        echo "Uptime    : $up"
-        echo "OS        : $opsy"
-        echo "Kernel    : $kern"
-        echo "Hostname  : $hn"
+        echo -e "\e[34;1mProsessor:\e[0m $cname"
+        echo -e "\e[34;1mCPU Cores:\e[0m $cores"
+        echo -e "\e[34;1mFrequency:\e[0m $freq MHz"
+        echo -e "\e[34;1mMemory:\e[0m    $tram MB"
+        echo -e "\e[34;1mSwap:\e[0m      $vram MB"
+        echo -e "\e[34;1mUptime:\e[0m    $up"
+        echo -e "\e[34;1mOS:\e[0m        $opsy"
+        echo -e "\e[34;1mKernel:\e[0m    $kern"
+        echo -e "\e[34;1mHostname:\e[0m  $hn"
 echo "---------------------------------------------------------------------------"
-echo "Apa Yang Ingin Anda Lakukan?"
-PS3='Masukkan Angka Pilihan Yang Diinginkan: '
-options=("Buat Akun SSH/VPN" "Buat Akun Trial SSH/VPN" "Mengubah Password Akun SSH/VPN" "Perpanjang Akun SSH/VPN" "Hapus Akun SSH/VPN" "Mengaktifkan Sistem Pelanggaran Multi Login" "Menonaktifkan Sitem Pelanggaran Multi Login" "Mematikan Akun SSH/VPN Login Max 2 Device" "Cek Akun Dan Masa Aktif SSH/VPN" "Akun SSH/VPN Aktif" "Akun SSH/VPN Expired" "Mematikan Akun SSH/VPN Yang Sudah Expired" "Membuat Banner SSH" "Benchmark" "Restart Server" "Restart Webmin" "Restart Dropbear" "Restart Squid" "Ganti Password VPS" "Penggunaan Data VPS Oleh Akun SSH/VPN" "Ram Status" "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN" "Melihat Lokasi User Akun SSH/VPN" "Test Speed VPS" "Mengubah Port OpenVPN" "Mengubah Port Dropbear" "Mengubah Port Openssh" "Menambahkan Port Squid" "Quit")
-select opt in "${options[@]}"
-
-do
-    case $opt in
-        "Buat Akun SSH/VPN")
+	echo "Apa Yang Ingin Anda Lakukan?"
+	echo -e "\e[031;1m 1\e[0m) Buat Akun SSH/VPN"
+	echo -e "\e[031;1m 2\e[0m) Buat Akun Trial SSH/VPN"
+	echo -e "\e[031;1m 3\e[0m) Mengubah Password Akun SSH/VPN"
+	echo -e "\e[031;1m 4\e[0m) Perpanjang Akun SSH/VPN"
+	echo -e "\e[031;1m 5\e[0m) Hapus Akun SSH/VPN"
+	echo -e "\e[031;1m 6\e[0m) Mengaktifkan Sistem Pelanggaran Multi Login"
+	echo -e "\e[031;1m 7\e[0m) Menonaktifkan Sitem Pelanggaran Multi Login"
+	echo -e "\e[031;1m 8\e[0m) Mematikan Akun SSH/VPN Login Max 2 Device"
+	echo -e "\e[031;1m 9\e[0m) Cek Akun Dan Masa Aktif SSH/VPN"
+	echo -e "\e[031;1m10\e[0m) Akun SSH/VPN Aktif"
+	echo -e "\e[031;1m11\e[0m) Akun SSH/VPN Expired"
+	echo -e "\e[031;1m12\e[0m) Mematikan Akun SSH/VPN Yang Sudah Expired"
+	echo -e "\e[031;1m13\e[0m) Membuat Banner SSH"
+	echo -e "\e[031;1m14\e[0m) Benchmark"
+	echo -e "\e[031;1m15\e[0m) Restart Server"
+	echo -e "\e[031;1m16\e[0m) Restart Webmin"
+	echo -e "\e[031;1m17\e[0m) Restart Dropbear"
+	echo -e "\e[031;1m18\e[0m) Restart Squid"
+	echo -e "\e[031;1m19\e[0m) Ganti Password VPS"
+	echo -e "\e[031;1m20\e[0m) Penggunaan Data VPS Oleh Akun SSH/VPN"
+	echo -e "\e[031;1m21\e[0m) Ram Status"
+	echo -e "\e[031;1m22\e[0m) Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN"
+	echo -e "\e[031;1m23\e[0m) Melihat Lokasi User Akun SSH/VPN"
+	echo -e "\e[031;1m24\e[0m) Test Speed VPS"
+	echo -e "\e[031;1m25\e[0m) Mengubah Port OpenVPN"
+	echo -e "\e[031;1m26\e[0m) Mengubah Port Dropbear"
+	echo -e "\e[031;1m27\e[0m) Mengubah Port Openssh"
+	echo -e "\e[031;1m28\e[0m) Menambahkan Port Squid"
+	echo ""
+	echo -e "\e[031;1m x\e[0m) Exit"
+	echo ""
+	read -p "Masukkan Angka Pilihan Yang Diinginkan : " option1
+	case $option1 in
+	1)
 			create_user
-			break
             ;;
-		"Buat Akun Trial SSH/VPN")
+		2)
 			trial
-			break
 			;;
-		"Mengubah Password Akun SSH/VPN")
+		3)
 			read -p "Isi Nama Username Yang Akan Diubah Password Nya: " uname
 		read -p "Silahkan Ditulis Dengan Password Baru: " pass
 		echo "$uname:$pass" | chpasswd
 		echo "Password Akun SSH/VPN Sudah Diubah Menjadi $pass"
-			break
 			;;
-        "Perpanjang Akun SSH/VPN")
+        4)
             renew_user
-            break
             ;;
-        "Hapus Akun SSH/VPN")
+        5)
             delete_user
-            break
             ;;	
-	"Mengaktifkan Sistem Pelanggaran Multi Login")
-		 #echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimitreboot
+	6)
+		 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimitreboot
 	   echo "* * * * * root ./userlimit.sh 2" > /etc/cron.d/userlimit1
 	   echo "* * * * * root sleep 10; ./userlimit.sh 2" > /etc/cron.d/userlimit2
            echo "* * * * * root sleep 20; ./userlimit.sh 2" > /etc/cron.d/userlimit3
            echo "* * * * * root sleep 30; ./userlimit.sh 2" > /etc/cron.d/userlimit4
            echo "* * * * * root sleep 40; ./userlimit.sh 2" > /etc/cron.d/userlimit5
            echo "* * * * * root sleep 50; ./userlimit.sh 2" > /etc/cron.d/userlimit6
-	   e#cho "@reboot root /root/userlimitssh.sh" >> /etc/cron.d/userlimitreboot
+	   echo "@reboot root /root/userlimitssh.sh" >> /etc/cron.d/userlimitreboot
 	   echo "* * * * * root ./userlimitssh.sh 2" >> /etc/cron.d/userlimit1
 	   echo "* * * * * root sleep 11; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit2
            echo "* * * * * root sleep 21; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit3
@@ -141,11 +163,10 @@ do
 	    service cron restart
 	    service ssh restart
 	    service dropbear restart
-	    echo "------------+ SISTEM SUDAH DI AKTIFKAN +--------------" | lolcat	  
-	echo "Jangan Lupa Dimatikan Sistem Nya, Supaya Tidak Terjadi Apa-Apa" | boxes -d boy | lolcat
-		break
-		;;
-	"Menonaktifkan Sitem Pelanggaran Multi Login")
+	    echo "------------+ SISTEM SUDAH DI AKTIFKAN +--------------"	  
+	echo "Jangan Lupa Dimatikan Sistem Nya, Supaya Tidak Terjadi Apa-Apa"		
+	;;
+	7)
 	rm -rf /etc/cron.d/userlimit1
 	rm -rf /etc/cron.d/userlimit2
 	rm -rf /etc/cron.d/userlimit3
@@ -156,103 +177,82 @@ do
 	service cron restart
 	    service ssh restart
 	    service dropbear restart
-	echo "------------+ SISTEM SUDAH DI NONAKTIFKAN +--------------" | lolcat
-	break
+	echo "------------+ SISTEM SUDAH DI NONAKTIFKAN +--------------"
 	;;
-		"Mematikan Akun SSH/VPN Login Max 2 Device")
+		8)
 			bash userlimit 2
-			break
 			;;
-		"Cek Akun Dan Masa Aktif SSH/VPN")
+		9)
 			cekuser
-			break
 			;;
-		"Akun SSH/VPN Aktif")
+		10)
 			not_expired_users
-			break
 			;;
-		"Akun SSH/VPN Expired")
+		11)
 			expired_users
-			break
 			;;	
-		"Mematikan Akun SSH/VPN Yang Sudah Expired")
+		12)
 			bannedexp
-			break
 			;;
-		"Membuat Banner SSH")
+		13)
 			echo -e "1. Simpan text (CTRL + X, lalu ketik Y dan tekan Enter) 2. Membatalkan edit text (CTRL + X, lalu ketik N dan tekan Enter)"
 			read -p "Tekan ENTER Untuk Melanjutkan"
 			nano /etc/bannerssh.net
 			service ssh restart &&  service dropbear restart
-			break
 			;;
-		"Benchmark")
+		14)
 			benchnetwork
-			break
 			;;
-		"Restart Server")
+		15)
 			reboot
-			break
 			;;
-		"Restart Webmin")
+		16)
 			service webmin restart
-			break
 			;;
-		"Restart Dropbear")	
+		17)	
 			service dropbear restart
-			break
 			;;
-		"Restart Squid")
+		18)
 			service squid3 restart
-			break
 			;;
-		"Ganti Password VPS")
+		19)
 			read -p "Silahkan Tulis Passsword VPS Baru Anda: " pass	
 		echo "root:$pass" | chpasswd
 		echo "Password VPS Sudah Diganti Menjadi $pass"
-			break
 			;;
-		"Penggunaan Data VPS Oleh Akun SSH/VPN")
+		20)
 			used_data
-			break
 			;;
-		"Ram Status")
+		21)
 		    free -h | grep -v + > /tmp/ramcache
             cat /tmp/ramcache | grep -v "Swap"
-            break
             ;;
-        "Melihat Akun SSH/VPN Login Menggunakan Dropbear, OpenSSH, Dan PPTP VPN")
+        22)
             userlogin
-            break
 			;;
-		"Melihat Lokasi User Akun SSH/VPN")
-	lokasi
+		23)
 	echo "Contoh: 112.123.345.126 lalu Enter"
 read -p "Ketik Salah Satu Alamat IP User: " userip
 curl ipinfo.io/$userip
-			break
 			;;
-		"Test Speed VPS")
+		24)
 			testspeed
-			break
 			;;
-		"Mengubah Port OpenVPN")	
+		25)
             echo "What OpenVPN port would you like  to change to?"
             read -p "Port: " -e -i 1194 PORT
             sed -i "s/port [0-9]*/port $PORT/" /etc/openvpn/1194.conf
             service openvpn restart
             echo "OpenVPN Updated : Port $PORT"
-			break
 			;;
-		"Mengubah Port Dropbear")	
+		26)
             echo "What Dropbear port would you like to change to?"
             read -p "Port: " -e -i 443 PORT
             sed -i "s/DROPBEAR_PORT=[0-9]*/DROPBEAR_PORT=$PORT/" /etc/default/dropbear
             service dropbear restart
             echo "Dropbear Updated : Port $PORT"
-			break
 			;;
-		"Mengubah Port Openssh")	
+		27)
             echo "Silahkan ganti port Openssh anda lalu klik enter?"| lolcat
             echo "Port default dan Port 2 tidak boleh sama !!!"| lolcat
 	    echo "Port default: 22"| lolcat
@@ -261,15 +261,13 @@ curl ipinfo.io/$userip
            # sed -i "s/http_port [0-9]*\nhttp_port [0-9]*/http_port $PORT1\nhttp_port $PORT2/g" /etc/squid3/squid.conf
             service ssh restart
             echo "Openssh Updated Port: $PORT"| lolcat
-			break
 			;;	
-        "Menambahkan Port Squid")	
+        28)
             bash squid.sh
-			break
 			;;			
-        "Quit")
-            break
+        29)
+            ;;		
+        x)
             ;;
         *) echo invalid option;;
     esac
-done
