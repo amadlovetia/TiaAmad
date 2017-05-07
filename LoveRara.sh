@@ -199,6 +199,9 @@ rm /root/webmin_1.670_all.deb
 service webmin restart
 service vnstat restart
 
+# install crontab
+wget -O /etc/crontab "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/crontab"
+
 # usernew
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/usernew.sh
 cp /root/usernew.sh /usr/bin/usernew
