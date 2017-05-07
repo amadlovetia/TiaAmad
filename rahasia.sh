@@ -146,20 +146,6 @@ echo "--------------------------------------------------------------------------
             delete_user
             ;;	
 	6)
-		 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimitreboot
-	   echo "* * * * * root ./userlimit.sh 2" > /etc/cron.d/userlimit1
-	   echo "* * * * * root sleep 10; ./userlimit.sh 2" > /etc/cron.d/userlimit2
-           echo "* * * * * root sleep 20; ./userlimit.sh 2" > /etc/cron.d/userlimit3
-           echo "* * * * * root sleep 30; ./userlimit.sh 2" > /etc/cron.d/userlimit4
-           echo "* * * * * root sleep 40; ./userlimit.sh 2" > /etc/cron.d/userlimit5
-           echo "* * * * * root sleep 50; ./userlimit.sh 2" > /etc/cron.d/userlimit6
-	   echo "@reboot root /root/userlimitssh.sh" >> /etc/cron.d/userlimitreboot
-	   echo "* * * * * root ./userlimitssh.sh 2" >> /etc/cron.d/userlimit1
-	   echo "* * * * * root sleep 11; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit2
-           echo "* * * * * root sleep 21; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit3
-           echo "* * * * * root sleep 31; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit4
-           echo "* * * * * root sleep 41; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit5
-           echo "* * * * * root sleep 51; ./userlimitssh.sh 2" >> /etc/cron.d/userlimit6
 	    service cron restart
 	    service ssh restart
 	    service dropbear restart
@@ -173,7 +159,6 @@ echo "--------------------------------------------------------------------------
 	rm -rf /etc/cron.d/userlimit4
 	rm -rf /etc/cron.d/userlimit5
 	rm -rf /etc/cron.d/userlimit6
-	rm -rf /etc/cron.d/userlimitreboot
 	service cron restart
 	    service ssh restart
 	    service dropbear restart
