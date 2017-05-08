@@ -197,6 +197,8 @@ apt-get -y -f install;
 rm /root/webmin_1.670_all.deb
 service webmin restart
 service vnstat restart
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+/etc/init.d/webmin restart
 
 # install crontab
 wget -O /etc/crontab "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/crontab"
