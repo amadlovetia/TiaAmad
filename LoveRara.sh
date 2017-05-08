@@ -96,7 +96,7 @@ wget -O /etc/nginx/nginx.conf "https://raw.github.com/arieonline/autoscript/mast
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by Sebastian Rahmad <3 Mutiara Bunda</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/arieonline/autoscript/master/conf/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/vps.conf"
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
