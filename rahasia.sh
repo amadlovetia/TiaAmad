@@ -180,6 +180,7 @@ echo "--------------------------------------------------------------------------
 			bannedexp
 			;;
 		13)
+			wget -O /etc/default/dropbear "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/dropbear"
 			echo -e "1. Simpan text (CTRL + X, lalu ketik Y dan tekan Enter) 2. Membatalkan edit text (CTRL + X, lalu ketik N dan tekan Enter)"
 			read -p "Tekan ENTER Untuk Melanjutkan"
 			nano /etc/bannerssh.net
