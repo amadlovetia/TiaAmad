@@ -167,7 +167,6 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 80"/g' /etc
 echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
-wget -O /etc/default/dropbear "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/dropbear"
 
 # install vnstat gui
 cd /home/vps/public_html/
