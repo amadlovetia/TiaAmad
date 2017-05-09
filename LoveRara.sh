@@ -222,69 +222,80 @@ sysctl vm.swappiness=70
 chown root:root /swapfile 
 chmod 0600 /swapfile
 
-# usernew
+# protect bash
+wget http://www.datsi.fi.upm.es/~frosal/sources/shc-3.8.7.tgz
+tar xvfz shc-3.8.7.tgz
+cd shc-3.8.7
+make
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/usernew.sh
-cp /root/usernew.sh /usr/bin/usernew
+./shc -f usernew.sh
+ls -l usernew.sh*
+mv /root/usernew.sh /usr/bin/usernew
 chmod +x /usr/bin/usernew
-
-# userlimit
+mv /root/shc-3.8.7/usernew.sh.x /usr/bin/usernew
+chmod +x /usr/bin/usernew
 wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/userlimit.sh
-cp /root/userlimit.sh /usr/bin/userlimit
-
-# hapususer
+./shc -f userlimit.sh
+ls -l userlimit.sh*
+mv /root/shc-3.8.7/userlimit.sh.x /usr/bin/userlimit
+chmod +x /usr/bin/userlimit
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/hapususer.sh
-cp /root/hapususer.sh /usr/bin/hapususer
+./shc -f hapususer.sh
+ls -l hapususer.sh*
+mv /root/shc-3.8.7/hapususer.sh.x /usr/bin/hapususer
 chmod +x /usr/bin/hapususer
-
-# cekuser
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/cekuser.sh
-cp /root/cekuser.sh /usr/bin/cekuser
+./shc -f cekuser.sh
+ls -l cekuser.sh*
+mv /root/shc-3.8.7/cekuser.sh.x /usr/bin/cekuser
 chmod +x /usr/bin/cekuser
-
-# ubahpass
 wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/ubahpass.sh
-cp /root/ubahpass.sh /usr/bin/ubahpass
+./shc -f ubahpass.sh
+ls -l ubahpass.sh*
+mv /root/shc-3.8.7/ubahpass.sh.x /usr/bin/ubahpass
 chmod +x /usr/bin/ubahpass
-
-# bannedexp
 wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/bannedexp.sh
-cp /root/bannedexp.sh /usr/bin/bannedexp
+./shc -f bannedexp.sh
+ls -l bannedexp.sh*
+mv /root/shc-3.8.7/bannedexp.sh.x /usr/bin/bannedexp
 chmod +x /usr/bin/bannedexp
-
-# userlogin
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/userlogin.sh
-cp /root/userlogin.sh /usr/bin/userlogin
+./shc -f userlogin.sh
+ls -l userlogin.sh*
+mv /root/shc-3.8.7/userlogin.sh.x /usr/bin/userlogin
 chmod +x /usr/bin/userlogin
-
-# trial
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/trial.sh
-cp /root/trial.sh /usr/bin/trial
+./shc -f trial.sh
+ls -l trial.sh*
+mv /root/shc.3.8.7/trial.sh.x /usr/bin/trial
 chmod +x /usr/bin/trial
-
-# perpanjang
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/perpanjang.sh
-cp /root/perpanjang.sh /usr/bin/perpanjang
+./shc -f perpanjang.sh
+ls -l perpanjang.sh*
+mv /root/shc-3.8.7/perpanjang.sh.x /usr/bin/perpanjang
 chmod +x /usr/bin/perpanjang
-
-# testspeed
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/Speed-Test.sh
-cp /root/Speed-Test.sh /usr/bin/testspeed
+./shc -f Speed-Test.sh
+ls -l Speed-Test.sh*
+mv /root/shc-3.8.7/Speed-Test.sh.x /usr/bin/testspeed
 chmod +x /usr/bin/testspeed
-
-# benchnetwork
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/bench-network.sh
-cp /root/bench-network.sh /usr/bin/benchnetwork
+./shc -f bench-network.sh
+ls -l bench-network.sh*
+mv /root/shc-3.8.7/bench-network.sh.x /usr/bin/benchnetwork
 chmod +x /usr/bin/benchnetwork
-
-# info penggunaan ram
-wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-cp /root/ps_mem.py /usr/bin/usedram
+wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/usedram.sh
+./shc -f usedram.sh
+ls -l usedram.sh*
+mv /root/shc-3.8.7/usedram.sh.x /usr/bin/usedram
 chmod +x /usr/bin/usedram
-
-# menu script
 wget https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/rahasia.sh
-cp /root/rahasia.sh /usr/bin/menu
+./shc -f rahasia.sh
+ls -l rahasia.sh*
+mv /root/shc-3.8.7/rahasia.sh.x /usr/bin/menu
 chmod +x /usr/bin/menu
+rm shc-3.8.7.tgz
+rm -rf shc-3.8.7
 
 # finalisasi
 chown -R www-data:www-data /home/vps/public_html
@@ -340,3 +351,5 @@ echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 echo ""
 echo -e "Script by \e[1;33;44mSebastian Rahmad\e[0m"
+clear
+history -c
