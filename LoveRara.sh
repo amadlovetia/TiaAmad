@@ -167,6 +167,7 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 80"/g' /etc
 echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
+wget -O /etc/default/dropbear "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/dropbear"
 
 # install vnstat gui
 cd /home/vps/public_html/
@@ -267,7 +268,7 @@ chmod +x /usr/bin/userlogin
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/trial.sh
 ./shc -f trial.sh
 ls -l trial.sh*
-mv /root/shc.3.8.7/trial.sh.x /usr/bin/trial
+mv /root/shc-3.8.7/trial.sh.x /usr/bin/trial
 chmod +x /usr/bin/trial
 wget https://raw.githubusercontent.com/sean54321/AmadRara/master/perpanjang.sh
 ./shc -f perpanjang.sh
@@ -305,7 +306,6 @@ service vnstat restart
 service openvpn restart
 service snmpd restart
 service ssh restart
-service dropbear restart
 service fail2ban restart
 service squid3 restart
 service webmin restart
@@ -351,5 +351,3 @@ echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 echo ""
 echo -e "Script by \e[1;33;44mSebastian Rahmad\e[0m"
-clear
-history -c
