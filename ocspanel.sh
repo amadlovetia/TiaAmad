@@ -7,18 +7,16 @@ echo "Masukkan Password Yang Anda Inginkan Sesudah Menekan ENTER"
 read -p "Tekan ENTER Untuk Melanjutkan"
 apt-get update && apt-get -y install mysql-server
 mysql_secure_installation
-n
-y
-y
-y
-y
-chown -R mysql:mysql /var/lib/mysql/ && chmod -R 755 /var/lib/mysql/
-apt-get -y install nginx php5 php5-fpm php5-cli php5-mysql php5-mcrypt
+-n
+-y
+-y
+-y
+-y
 rm /etc/nginx/sites-enabled/default && rm /etc/nginx/sites-available/default
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 mv /etc/nginx/conf.d/vps.conf /etc/nginx/conf.d/vps.conf.backup
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/nginx.conf"
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/amadlovetia/TiaAmad/master/conf/vps.conf"
+wget -O /etc/nginx/nginx.conf "http://script.hostingtermurah.net/repo/blog/ocspanel-debian7/nginx.conf"
+wget -O /etc/nginx/conf.d/vps.conf "http://script.hostingtermurah.net/repo/blog/ocspanel-debian7/vps.conf"
 sed -i 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php5/fpm/php.ini
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 useradd -m vps && mkdir -p /home/vps/public_html
@@ -31,7 +29,7 @@ echo "Sesudah Menekan ENTER Akan Dimintai Password Yang Kamu Buat Sebelum Nya"
 echo "Harap Isi Dengan Benar Ya...."
 read -p "Silahkan Tekan ENTER Jika Sudah Melakukan Perintah Diatas"
 mysql -u root -p
-CREATE DATABASE IF NOT EXISTS OCSPANEL;EXIT;
+-CREATE DATABASE IF NOT EXISTS OCSPANEL;EXIT;
 apt-get -y install git
 cd /home/vps/public_html
 git init
@@ -57,4 +55,4 @@ echo ""
 echo ""
 echo "Sekian Script Auto Installer OCS Panel Dari Sebastian Rahmad"
 echo "Saya Ucapkan Terima Kasih"
-echo "Silahkan Buka OCS Mu Yak, Isi Website Nya: http://$IP:99/
+echo "Silahkan Buka OCS Mu Yak, Isi Website Nya: http://$IP:99/"
